@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+	<link name="torso">
+	  <collision>
+	    <origin rpy="0 0 0" xyz="-0.03 0 -0.042"/>
+	    <geometry>
+	     <mesh filename="package://robbie_description/meshes/upperBodyAss_ORIGIN.STL"/>
+	   </geometry>
+	 </collision>
+	 <visual>
+	  <origin rpy="0 0 0" xyz="-0.03 0 -0.042"/>
+	  <geometry>
+	    <mesh filename="package://robbie_description/meshes/upperBodyAss_ORIGIN.STL" scale="1 1 1"/>
+	  </geometry>
+	  <material name="blue">
+	    <color rgba="0 0 .8 1"/>
+	  </material>      
+	</visual>
+	<inertial>
+	  <origin xyz="0 0 ${torsoHeight/2}" rpy="0 0 0"/>
+	  <mass value="${torsoMass}"/>
+	  <box_inertia m="${torsoMass}" x="${torsoWidth}" y="${torsoDepth}" z="${torsoHeight}"/>
+	</inertial>  
+	</link>
+
+
+</robot>
+
+
+
+
+
+

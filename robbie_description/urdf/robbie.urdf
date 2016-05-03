@@ -1,0 +1,312 @@
+<?xml version="1.0"?>
+<robot name="myfirst" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <xacro:include filename="$(find robbie_description)/urdf/robbie.gazebo" />
+
+
+  <link name="base_link"/>
+ 
+  <link name="calfLink">
+
+    <collision>
+      <origin rpy="0 1.57075 0" xyz="0 0 0.2"/>
+      <geometry>
+	<box size="0.4 0.36 0.14"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin rpy="0 1.57075 0" xyz="0 0 0.2"/>
+      <geometry>
+        <box size="0.4 0.36 0.14"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.18" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    </inertial>
+
+  </link>
+
+  <link name="wheel_l">
+
+    <collision>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+      <geometry>
+	<cylinder length="0.055" radius="0.1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.055" radius="0.1"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    </inertial>
+
+  </link>
+
+  <link name="wheel_r">
+
+    <collision>
+      <origin rpy="1.57075 0 0" xyz="0 0 0"/>
+      <geometry>
+	<cylinder length="0.055" radius="0.1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin rpy="-1.57075 0 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.055" radius="0.1"/>
+      </geometry>
+      <material name="black1">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    </inertial>
+
+  </link>
+  
+  <link name="thigh">
+
+    <collision>
+      <origin rpy="0 1.57075 0" xyz="0 0 0.19"/>
+      <geometry>
+	<box size="0.38 0.34 0.14"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin rpy="0 1.57075 0" xyz="0 0 0.19"/>
+      <geometry>
+        <box size="0.38 0.34 0.14"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.095" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    </inertial>
+
+  </link>
+
+  <link name="torso">
+
+    <collision>
+      <origin rpy="0 1.57075 0" xyz="0 0 .1925"/>
+      <geometry>
+	<box size="0.385 0.40 0.25"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin rpy="0 1.57075 0" xyz="0 0 .1925"/>
+      <geometry>
+        <box size="0.385 0.40 0.25"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 .8 1"/>
+      </material>      
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.2" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    </inertial>
+
+  </link>
+
+  <link name="shoulder_l">
+
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -.225"/>
+      <geometry>
+	<cylinder length=".45" radius="0.05"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 -.225"/>
+      <geometry>
+        <cylinder length=".45" radius="0.05"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.2" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    </inertial>
+
+  </link>
+
+  <link name="shoulder_r">
+
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -.225"/>
+      <geometry>
+	<cylinder length=".45" radius="0.05"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 -.225"/>
+      <geometry>
+        <cylinder length=".45" radius="0.05"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.2" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    </inertial>
+
+  </link>
+
+  <link name="shank">
+
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -.225"/>
+      <geometry>
+	<box size="0.02 0.02 0.25"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 -.225"/>
+      <geometry>
+        <box size="0.02 0.02 0.25"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 0.125" rpy="0 0 0"/>
+      <mass value="1"/>
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    </inertial>
+
+  </link>
+
+  
+  
+  
+
+  <joint name="joint_footprint" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 .1"/>
+    <parent link="base_link"/>
+    <child link="calfLink"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="300" lower="1.2" upper="1.3" velocity="4.36"/>    
+  </joint>
+
+  <joint name="joint_1" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.115 0"/>
+    <parent link="calfLink"/>
+    <child link="wheel_l"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="joint_2" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.115 0"/>
+    <parent link="calfLink"/>
+    <child link="wheel_r"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="calf_thigh" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 .4"/>
+    <parent link="calfLink"/>
+    <child link="thigh"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="300" lower="-2.33" upper="-2.3" velocity="4.36"/>
+  </joint>
+
+  <joint name="thigh_torso" type="revolute">
+    <origin rpy="0 0 0" xyz="0 0 .38"/>
+    <parent link="thigh"/>
+    <child link="torso"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="300" lower="1.05" upper="1.15" velocity="4.36"/>
+  </joint>
+
+  <joint name="torso_shoulder_l" type="continuous">
+    <origin rpy="0 0 0" xyz="0 .25 .385"/>
+    <parent link="torso"/>
+    <child link="shoulder_l"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="torso_shoulder_r" type="continuous">
+    <origin rpy="0 0 0" xyz="0 -.25 .385"/>
+    <parent link="torso"/>
+    <child link="shoulder_r"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="calf_shank" type="continuous">
+    <origin rpy="0 0 0" xyz="0 0 .25"/>
+    <parent link="calfLink"/>
+    <child link="shank"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+</robot>
+
+

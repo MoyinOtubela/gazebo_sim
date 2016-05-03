@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:include filename="$(find robbie_description)/urdf/arm/arm.transmission.xacro" />
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+<link name="shoulder_l">
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+     <mesh filename="package://robbie_description/meshes/shoulderAss_collision.STL"/>
+   </geometry>
+ </collision>
+ <visual>
+  <origin rpy="0 0 0" xyz="0 0 0"/>
+  <geometry>
+    <mesh filename="package://robbie_description/meshes/shoulderAss.STL" scale="1 1 1"/>
+  </geometry>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+</visual>
+<inertial>
+  <origin xyz="0 0 ${-shoulderLength/2}" rpy="0 0 0"/>
+  <mass value="${shoulderMass}"/>
+  <cylinder_inertia m="${shoulderMass}" r="${shoulderRadius}" h="${shoulderLength}"/>
+</inertial>
+</link>
+
+
+<link name="shoulder_r">
+  <collision>
+    <origin rpy="0 0 ${PI}" xyz="0 0 0"/>
+    <geometry>
+     <mesh filename="package://robbie_description/meshes/shoulderAss.STL"/>
+   </geometry>
+ </collision>
+ <visual>
+  <origin rpy="0 0 ${PI}" xyz="0 0 0"/>
+  <geometry>
+    <mesh filename="package://robbie_description/meshes/shoulderAss.STL" scale="1 1 1"/>
+  </geometry>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+</visual>
+<inertial>
+  <origin xyz="0 0 ${-shoulderLength/2}" rpy="0 0 0"/>
+  <mass value="${shoulderMass}"/>
+  <cylinder_inertia m="${shoulderMass}" r="${shoulderRadius}" h="${shoulderLength}"/>
+</inertial>
+</link>
+
+<link name="shoulder_lwr_l">
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+     <mesh filename="package://robbie_description/meshes/shoulderAss2_lowerfini_collision.STL"/>
+   </geometry>
+ </collision>
+ <visual>
+  <origin rpy="0 0 0" xyz="0 0 0"/>
+  <geometry>
+    <mesh filename="package://robbie_description/meshes/shoulderAss2_lowerfini.STL" scale="1 1 1"/>
+  </geometry>
+</visual>
+<inertial>
+  <origin xyz="0 0 ${-lShoulderLength/2}" rpy="0 0 0"/>
+  <mass value="${lShoulderMass}"/>
+  <cylinder_inertia m="${lShoulderMass}" r="${lShoulderRadius}" h="${lShoulderLength}"/>
+</inertial>
+</link>
+
+<link name="shoulder_lwr_r">
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+     <mesh filename="package://robbie_description/meshes/shoulderAss2_lowerfini_collision.STL"/>
+   </geometry>
+ </collision>
+ <visual>
+  <origin rpy="0 0 0" xyz="0 0 0"/>
+  <geometry>
+    <mesh filename="package://robbie_description/meshes/shoulderAss2_lowerfini.STL" scale="1 1 1"/>
+  </geometry>
+</visual>
+<inertial>
+  <origin xyz="0 0 ${-lShoulderLength/2}" rpy="0 0 0"/>
+  <mass value="${lShoulderMass}"/>
+  <cylinder_inertia m="${lShoulderMass}" r="${lShoulderRadius}" h="${lShoulderLength}"/>
+</inertial>
+</link>
+
+<joint name="shoulder_shoulder_l" type="prismatic">
+  <origin rpy="0 0 0" xyz="0 0.160 -0.06"/>
+  <parent link="shoulder_l"/>
+  <child link="shoulder_lwr_l"/>
+  <axis xyz="0 0 1"/>
+  <dynamics damping="1" friction="1"/>
+  <limit effort="300" lower="-.2" upper="0" velocity="0.1"/>
+</joint>
+
+<joint name="shoulder_shoulder_r" type="prismatic">
+  <origin rpy="0 0 0" xyz="0 -0.160 -0.06"/>
+  <parent link="shoulder_r"/>
+  <child link="shoulder_lwr_r"/>
+  <axis xyz="0 0 1"/>
+  <dynamics damping="0.7"/>
+  <limit effort="300" lower="-.2" upper="0" velocity="0.1"/>
+</joint>
+
+</robot>
+
+
+
+
+
+

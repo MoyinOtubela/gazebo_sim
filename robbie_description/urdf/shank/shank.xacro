@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:include filename="$(find robbie_description)/urdf/shank/shank.transmission.xacro" />
+
+	<!-- DECLARE VARIABLES -->
+  <xacro:property name="dist_between_wheels" value="0.2350"/>
+
+	<xacro:property name="shank_wheel_rad" value="0.100886"/>
+  <xacro:property name="shank_wheel_thickness" value="0.04547"/>
+  <xacro:property name="shank_wheel_mass" value="0.25"/>
+
+  <xacro:property name="shank_height" value="0.347"/>
+  <xacro:property name="shank_width" value="0.356"/>
+	<xacro:property name="shank_depth" value="0.15"/>
+  <xacro:property name="shank_mass" value="7"/>
+
+
+  <!--************************        WHEELS         ************************-->
+  <xacro:macro name="shank_wheel" params="side reflect" parent="shank_link">
+		<link name="wheel_${side}_link">
+			<collision>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<geometry>
+					<mesh filename="package://robbie_description/meshes/driveWheel_collision.stl"/>
+			 	</geometry>
+		 	</collision>
+		 	<visual>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<geometry>
+					<mesh filename="package://robbie_description/meshes/driveWheel.stl" scale="1 1 1"/>
+				</geometry>
+				<material name="black">
+					<color rgba="0.0 0.0 0.0 1.0"/>
+				</material>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<mass value="${shank_wheel_mass}"/>
+				<cylinder_inertia m="${shank_wheel_mass}" r="${shank_wheel_rad}" h="${shank_wheel_thickness}" />
+			</inertial>  
+		</link>
+
+		<!--gazebo defns-->
+		<gazebo reference="wheel_${side}_link">
+			<material>Gazebo/Black</material>
+		</gazebo>
+		
+		<!-- define shank-wheel joint -->
+		<joint name="wheel_${side}_joint" type="continuous">
+			<parent link="shank_link"/>
+			<child link="wheel_${side}_link"/>
+			<origin rpy="0 0 0" xyz="0 ${dist_between_wheels/2*reflect} 0"/>
+			<axis xyz="0 1 0"/>
+		</joint>
+
+		<xacro:wheel_transmission side="${side}" />
+	</xacro:macro>
+	<!--***********************************************************************-->
+
+	<!--************************        SHANK          ************************-->
+  <xacro:macro name="shank_ass" params="name" >
+		
+		<!-- base link -->
+		<link name="${name}_footprint" />
+
+		<!-- shank link -->
+		<link name="${name}_link">
+			<collision>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<geometry>
+					<mesh filename="package://robbie_description/meshes/shank_collision.stl"/>
+				</geometry>
+			</collision>
+			<visual>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+					<geometry>
+				 		<mesh filename="package://robbie_description/meshes/shank.stl" scale="1 1 1"/>
+					</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 ${shank_height/2}" rpy="0 0 0"/>
+				<mass value="${shank_mass}"/>
+				<box_inertia m="${shank_mass}" x="${shank_depth}" y="${shank_height}" z="${shank_width}"/>
+			</inertial>  
+		</link>
+
+		<gazebo reference="${name}_link">
+			<material>Gazebo/White</material>
+		</gazebo>
+
+
+		<!-- footprint-shank joint -->
+		<joint name="${name}_footprint_joint" type="fixed">
+			<origin xyz="0 0 .1" rpy="0 1.22173048 0"/>
+			<parent link="${name}_footprint"/>
+			<child link="${name}_link"/>
+			<axis xyz="0 1 0"/>
+			<limit effort="300" lower="-1" upper="1" velocity="0.1"/>
+		</joint>
+
+	<!-- declare two shank wheels -->
+    <xacro:shank_wheel side="right" reflect="1.0" />
+    <xacro:shank_wheel side="left" reflect="-1.0" />
+	</xacro:macro>
+	<!--***********************************************************************-->
+
+</robot>
+
+
+
+
+
+
+

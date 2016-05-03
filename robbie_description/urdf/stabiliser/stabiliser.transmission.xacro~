@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<transmission name="stab_transmission">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="stab_joint">
+		  <hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="stabiliser_motor">
+		  <hardwareInterface>EffortJointInterface</hardwareInterface>
+		  <mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+</robot>

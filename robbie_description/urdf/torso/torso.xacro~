@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:include filename="$(find robbie_description)/urdf/torso/torso_transmission.xacro" />
+
+	<!-- DECLARE VARIABLES -->
+  <xacro:property name="torso_height" value="0.384"/>
+  <xacro:property name="torso_width" value="0.360"/>
+  <xacro:property name="torso_depth" value="0.225"/>
+  <xacro:property name="torso_mass" value="16"/>
+
+	<xacro:macro name="torso" params="parent">
+
+		<link name="torso_link">
+			<collision>
+			  <origin rpy="0 0 0" xyz="-0.03 0 -0.042"/>
+			  <geometry>
+			   <mesh filename="package://robbie_description/meshes/torso.stl"/>
+			 	</geometry>
+		 	</collision>
+		 	<visual>
+				<origin rpy="0 0 0" xyz="-0.03 0 -0.042"/>
+				<geometry>
+			 		<mesh filename="package://robbie_description/meshes/torso.stl" scale="1 1 1"/>
+				</geometry>
+				<material name="blue">
+					<color rgba="0 0 .8 1"/>
+				</material>      
+			</visual>
+			<inertial>
+				<origin xyz="0 0 ${torso_height/2}" rpy="0 0 0"/>
+				<mass value="${torso_mass}"/>
+				<inertia  ixx="0.05" ixy = "0" ixz = "0"
+	    						iyy="0.05" iyz = "0"
+	    						izz="0.05"
+	  		/>
+			</inertial>  
+		</link>
+
+		<gazebo reference="torso_link">
+			<material>Gazebo/White</material>
+			<turnGravityOff>false</turnGravityOff>
+		</gazebo>
+
+		<joint name="hip_joint" type="revolute">
+			<origin rpy="0 1.57 0" xyz="0 0 .363"/>
+			<parent link="thigh_link"/>
+			<child link="torso_link"/>
+			<axis xyz="0 1 0"/>
+			<dynamics damping="1"/>
+			<limit effort="300" lower="-1" upper="0.7" velocity="0.1"/>
+		</joint>
+
+	</xacro:macro>
+
+</robot>
+
+
+
+
+
+

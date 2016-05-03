@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:include filename="$(find robbie_description)/urdf/arm/arm.transmission.xacro" />
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+	<!-- DECLARE VARIABLES -->
+  <xacro:property name="dist_between_shoulders" value="0.256"/>
+  <xacro:property name="dist_to_elbow" value="0.16"/>
+  <xacro:property name="arm_offset" value="0.06"/>
+
+  <xacro:property name="shoulder_rad" value="0.025"/>	<!-- radius of upper arm component -->
+  <xacro:property name="shoulder_length" value="0.300"/>	<!-- distance from hip to shoulder joint along torso -->
+  <xacro:property name="shoulder_mass" value=".25"/>				<!-- mass of upper arm component -->
+
+  <xacro:property name="arm_rad" value="0.02"/>		<!-- radius of lower arm component -->
+  <xacro:property name="arm_length" value="0.265"/>		<!-- length of lower arm -->
+  <xacro:property name="arm_mass" value=".25"/>				<!-- mass of lower arm component -->
+
+  <xacro:macro name="arm_ass" params="side reflect arm_rotate" parent="torso_link">
+
+		<link name="shoulder_${side}_link">
+			<collision>
+				<origin rpy="0 0 ${arm_rotate*PI}" xyz="0 0 0"/>
+				<geometry>
+				 <mesh filename="package://robbie_description/meshes/shoulderAss.STL"/>
+			 	</geometry>
+		 	</collision>
+		 	<visual>
+				<origin rpy="0 0 ${arm_rotate*PI}" xyz="0 0 0"/>
+				<geometry>
+					<mesh filename="package://robbie_description/meshes/shoulderAss.STL" scale="1 1 1"/>
+				</geometry>
+				<material name="white">
+					<color rgba="1 1 1 1"/>
+				</material>
+			</visual>
+			<inertial>
+				<origin xyz="0 ${-1*reflect*dist_to_elbow} ${-shoulder_length/2}" rpy="0 0 0"/>
+				<mass value="${shoulder_mass}"/>
+				<inertia  ixx="0.001" ixy = "0" ixz = "0"
+	    						iyy="0.001" iyz = "0"
+	    						izz="0.001"
+	  		/>
+			</inertial>
+		</link>
+
+		<link name="arm_${side}_link">
+			<collision>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<geometry>
+				 <mesh filename="package://robbie_description/meshes/shoulderAss2_lowerfini.STL"/>
+			 	</geometry>
+		 	</collision>
+		 	<visual>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<geometry>
+					<mesh filename="package://robbie_description/meshes/shoulderAss2_lowerfini.STL" scale="1 1 1"/>
+				</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 ${-arm_length/2}" rpy="0 0 0"/>
+				<mass value="${arm_mass}"/>
+				<cylinder_inertia m="${shoulder_mass}" r="${shoulder_rad}" h="${shoulder_length}" />
+			</inertial>
+		</link>
+
+		<gazebo reference="shoulder_${side}_link">
+			<material>Gazebo/Red</material>
+			<turnGravityOff>false</turnGravityOff>
+		</gazebo>
+
+		<gazebo reference="arm_${side}_link">
+			<material>Gazebo/Black</material>
+			<turnGravityOff>false</turnGravityOff>
+		</gazebo>
+
+		<joint name="shoulder_${side}_joint" type="continuous">
+			<origin rpy="0 0 0" xyz="0 ${-1*reflect*dist_between_shoulders/2} .3"/>
+			<parent link="torso_link"/>
+			<child link="shoulder_${side}_link"/>
+			<axis xyz="0 1 0"/>
+			<dynamics damping="1"/>
+			<limit effort="300" lower="-1" upper="0.383972435" velocity="0.1"/>
+		</joint>
+
+		<joint name="elbow_${side}_joint" type="prismatic">
+			<origin rpy="0 0 0" xyz="0 ${-1*dist_to_elbow*reflect} ${arm_offset*-1}"/>
+			<parent link="shoulder_${side}_link"/>
+			<child link="arm_${side}_link"/>
+			<axis xyz="0 0 1"/>
+			<dynamics damping="1" friction="1"/>
+			<limit effort="300" lower="-.2" upper="0" velocity="0.1"/>
+		</joint>
+
+    <xacro:shoulder_transmission side="${side}"  />
+    <xacro:elbow_transmission side="${side}" />		
+	
+	</xacro:macro>
+
+</robot>
+

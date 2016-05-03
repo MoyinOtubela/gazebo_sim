@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<xacro:include filename="$(find robbie_description)/urdf/lhm/lhm.transmission.xacro" />
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+	<link name="bwheel_l">
+		<collision>
+		  <origin rpy="0 0 0" xyz="0 0 0"/>
+		  <geometry>
+		   <mesh filename="package://robbie_description/meshes/butt_wheelFini_collision.STL"/>
+		 </geometry>
+	 </collision>
+	 <visual>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<geometry>
+		  <mesh filename="package://robbie_description/meshes/butt_wheelFini.STL" scale="1 1 1"/>
+		</geometry>
+		<material name="black">
+		  <color rgba="0.0 0.0 0.0 1.0"/>
+		</material>
+	</visual>
+	<inertial>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<mass value="${bWheelMass}"/>
+		<cylinder_inertia m="${bWheelMass}" r="${bWheelRadius}" h="${bWheelLength}"/>
+	</inertial>
+	</link>
+
+	<link name="bwheel_r">
+		<collision>
+		  <origin rpy="0 0 0" xyz="0 0 0"/>
+		  <geometry>
+		   <mesh filename="package://robbie_description/meshes/butt_wheelFini_collision.STL"/>
+		 </geometry>
+	 </collision>
+	 <visual>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<geometry>
+		  <mesh filename="package://robbie_description/meshes/butt_wheelFini.STL" scale="1 1 1"/>
+		</geometry>
+		<material name="black">
+		  <color rgba="0.0 0.0 0.0 1.0"/>
+		</material>
+	</visual>
+	<inertial>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<mass value="${bWheelMass}"/>
+		<cylinder_inertia m="${bWheelMass}" r="${bWheelRadius}" h="${bWheelLength}"/>
+	</inertial>
+	</link>
+
+	<link name="butt">
+		<collision>
+		  <origin rpy="0 0 0" xyz="0 0 0"/>
+		  <geometry>
+		   <mesh filename="package://robbie_description/meshes/butt_PART_collision.STL"/>
+		 </geometry>
+	 </collision>
+	 <visual>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<geometry>
+		  <mesh filename="package://robbie_description/meshes/butt_PART.STL" scale="1 1 1"/>
+		</geometry>
+		<material name="white">
+		  <color rgba="1 1 1 1"/>
+		</material>
+	</visual>
+	<inertial>
+		<origin xyz="0 0 ${bHeight/2}" rpy="0 0 0"/>
+		<mass value="${bMass}"/>
+		<box_inertia m="${bMass}" x="${bWidth}" y="${bDepth}" z="${bHeight}"/>
+	</inertial>
+	</link>
+
+	<joint name="b_wheel_l" type="continuous">
+		<origin rpy="0 0 0" xyz="0 .2125 0"/>
+		<parent link="butt"/>
+		<child link="bwheel_l"/>
+		<axis xyz="0 1 0"/>
+		<dynamics damping="1"/>
+		<limit effort="300" lower="-1" upper="0.383972435" velocity="0.1"/>
+	</joint>
+
+	<joint name="b_wheel_r" type="continuous">
+		<origin rpy="0 0 0" xyz="0 -0.2125 0"/>
+		<parent link="butt"/>
+		<child link="bwheel_r"/>
+		<axis xyz="0 1 0"/>
+		<dynamics damping="1"/>
+		<limit effort="300" lower="-1" upper="0.383972435" velocity="0.1"/>
+	</joint>
+
+
+
+</robot>
+
+
+
+
+
+

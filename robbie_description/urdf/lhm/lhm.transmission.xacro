@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<xacro:macro name="lhm_wheel_transmission" params="side">
+		<transmission name="lhm_${side}_transmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<!-- FOR HYDRO -->  <!--
+			<joint name="lhm_wheel_${side}_joint"/>  
+			--> 
+			<!-- FOR INDIGO -->
+			<joint name="lhm_wheel_${side}_joint"> 
+				<hardwareInterface>EffortJointInterface</hardwareInterface>
+    		</joint>
+			<actuator name="lhm_wheel_${side}_motor">
+				<hardwareInterface>EffortJointInterface</hardwareInterface>
+				<mechanicalReduction>1</mechanicalReduction>
+			</actuator>
+		</transmission>
+	</xacro:macro>
+
+	<transmission name="lhm_transmission">
+			<type>transmission_interface/SimpleTransmission</type>
+			<!-- FOR HYDRO -->  <!--
+			<joint name="lhm_torso_joint"/>
+			--> 
+			<!-- FOR INDIGO -->
+			<joint name="lhm_torso_joint">
+				<hardwareInterface>EffortJointInterface</hardwareInterface>
+    		</joint>
+			<actuator name="lhm__motor">
+				<hardwareInterface>EffortJointInterface</hardwareInterface>
+				<mechanicalReduction>1</mechanicalReduction>
+			</actuator>
+		</transmission>
+	
+</robot>

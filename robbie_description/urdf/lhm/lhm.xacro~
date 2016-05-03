@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<xacro:include filename="$(find robbie_description)/urdf/lhm/lhm.transmission.xacro" />
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+	<!-- DECLARE VARIABLES -->
+  <xacro:property name="lhm_dist_between_wheels" value="0.425"/>
+
+  <xacro:property name="lhm_wheel_thickness" value="0.0254"/>
+  <xacro:property name="lhm_wheel_rad" value="0.102175"/>
+  <xacro:property name="lhm_wheel_mass" value="0.2"/>
+
+  <xacro:property name="lhm_height" value="0.04"/>
+  <xacro:property name="lhm_width" value="0.336"/>
+  <xacro:property name="lhm_depth" value="0.035"/>
+  <xacro:property name="lhm_mass" value="2.25"/>
+
+	<!--************************        WHEELS         ************************-->
+  <xacro:macro name="lhm_wheel" params="side reflect" parent="lhm_link">
+		<link name="lhm_wheel_${side}_link">
+			<collision>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<geometry>
+				 <mesh filename="package://robbie_description/meshes/butt_wheelFini_collision.STL"/>
+			 </geometry>
+		 </collision>
+		 <visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://robbie_description/meshes/butt_wheelFini.STL" scale="1 1 1"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0.0 0.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="${lhm_wheel_mass}"/>
+			<cylinder_inertia m="${lhm_wheel_mass}" r="${lhm_wheel_rad}" h="${lhm_wheel_thickness}" />
+		</inertial>
+		</link>
+
+		<!--gazebo defns-->
+		<gazebo reference="lhm_wheel_${side}_link">
+			<material>Gazebo/Black</material>
+		</gazebo>
+		
+		<!-- define shank-wheel joint -->
+		<joint name="lhm_wheel_${side}_joint" type="continuous">
+			<parent link="lhm_link"/>
+			<child link="lhm_wheel_${side}_link"/>
+			<origin rpy="0 0 0" xyz="0 ${lhm_dist_between_wheels/2*reflect} 0"/>
+			<axis xyz="0 1 0"/>
+		</joint>
+
+		<xacro:lhm_wheel_transmission side="${side}" />
+
+	</xacro:macro>
+
+	<!--************************        LHM ASS          ************************-->
+  <xacro:macro name="lhm_ass" >
+		
+		<!-- lhm link -->
+		<link name="lhm_link">
+			<collision>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<geometry>
+					<mesh filename="package://robbie_description/meshes/butt_PART_collision.STL"/>
+				</geometry>
+			</collision>
+			<visual>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+					<geometry>
+				 		<mesh filename="package://robbie_description/meshes/butt_PART.STL" scale="1 1 1"/>
+					</geometry>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 ${lhm_height/2}" rpy="0 0 0"/>
+				<mass value="${lhm_mass}"/>
+				<inertia  ixx="0.001" ixy = "0" ixz = "0"
+	    						iyy="0.001" iyz = "0"
+	    						izz="0.001"
+	  		/>
+			</inertial>  
+		</link>
+
+		<gazebo reference="lhm_link">
+			<material>Gazebo/White</material>
+		</gazebo>
+
+		<joint name="lhm_torso_joint" type="prismatic">
+			<origin rpy="0 0 0" xyz="-0.03 0 -0.05"/>
+			<parent link="torso_link"/>
+			<child link="lhm_link"/>
+			<axis xyz="0 0 1"/>
+			<dynamics damping="1"/>
+			<limit effort="300" lower="-.2" upper="0" velocity="0.1"/>
+		</joint>
+
+	<!-- declare two shank wheels -->
+    <xacro:lhm_wheel side="right" reflect="1.0" />
+    <xacro:lhm_wheel side="left" reflect="-1.0" />
+
+	</xacro:macro>
+	<!--***********************************************************************-->
+
+</robot>
+
+
+
+
+
+

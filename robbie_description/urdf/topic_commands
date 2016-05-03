@@ -1,0 +1,20 @@
+rostopic pub -1 /robbie/knee_position_controller/command std_msgs/Float64 "data: 0.5"
+rostopic pub -1 /robbie/hip_position_controller/command std_msgs/Float64 "data: 0.5"
+rostopic pub -1 /robbie/stab_position_controller/command std_msgs/Float64 "data: 0.5"
+rostopic pub -1 /robbie/left_arm_position_controller/command std_msgs/Float64 "data: 0.5"
+rostopic pub -1 /robbie/right_arm_position_controller/command std_msgs/Float64 "data: 0.5"
+rostopic pub -1 /robbie/left_shoulder_position_controller/command std_msgs/Float64 "data: 0.5"
+rostopic pub -1 /robbie/right_shoulder_position_controller/command std_msgs/Float64 "data: 0.5"
+rostopic pub -1 /robbie/lhm_position_controller/command std_msgs/Float64 "data: 0.5"
+rostopic pub -1 /robbie/leftWheel_effort_controller/command std_msgs/Float64 "data: 0.5"
+rostopic pub -1 /robbie/rightWheel_effort_controller/command std_msgs/Float64 "data: 0.5"
+rostopic pub -1 /robbie/lhm_left_wheel_effort_controller/command std_msgs/Float64 "data: 0.5"
+rostopic pub -1 /robbie/lhm_right_wheel_effort_controller/command std_msgs/Float64 "data: 0.5"
+
+
+
+
+
+
+
+

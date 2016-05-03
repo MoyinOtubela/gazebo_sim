@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<transmission name="hip_transmission">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="hip_joint">
+		  <hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="hip_motor">
+		  <hardwareInterface>EffortJointInterface</hardwareInterface>
+		  <mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+</robot>
+

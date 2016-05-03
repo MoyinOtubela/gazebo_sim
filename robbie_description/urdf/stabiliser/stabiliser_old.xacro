@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:include filename="$(find robbie_description)/urdf/stabiliser/stabiliser.transmission.xacro" />
+  <xacro:property name="PI" value="3.1415926535897931"/>
+
+	<link name="shank">
+		<collision>
+		  <origin rpy="0 0 0" xyz="0 0 0"/>
+		  <geometry>
+		   <mesh filename="package://robbie_description/meshes/STABILISER_ASS_collision.STL"/>
+		 </geometry>
+	 </collision>
+	 <visual>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<geometry>
+		  <mesh filename="package://robbie_description/meshes/STABILISER_ASS.STL" scale="1 1 1"/>
+		</geometry>
+		<material name="white">
+		  <color rgba="1 1 1 1"/>
+		</material>
+	</visual>
+	<inertial>
+		<origin xyz="0 0 ${shankHeight/2}" rpy="0 0 0"/>
+		<mass value="${shankMass}"/>
+		<box_inertia m="${shankMass}" x="${shankWidth}" y="${shankDepth}" z="${shankHeight}"/>
+	</inertial>
+	</link>
+
+	<link name="shank_wheel">
+		<collision>
+		  <origin rpy="0 0 0" xyz="0 0 0"/>
+		  <geometry>
+		   <mesh filename="package://robbie_description/meshes/STABILISER_WHEEL_PART_collision.STL"/>
+		 </geometry>
+	 </collision>
+	 <visual>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<geometry>
+		  <mesh filename="package://robbie_description/meshes/STABILISER_WHEEL_PART.STL" scale="1 1 1"/>
+		</geometry>
+		<material name="black">
+		  <color rgba="0.0 0.0 0.0 1.0"/>
+		</material>
+	</visual>
+	<inertial>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<mass value="${sWheelMass}"/>
+		<cylinder_inertia m="${sWheelMass}" r="${sWheelRadius}" h="${sWheelLength}"/>
+	</inertial>
+	</link>
+
+	<joint name="shank_wheel" type="continuous">
+		<origin rpy="0 0 0" xyz="0 0 .25"/>
+		<parent link="shank"/>
+		<child link="shank_wheel"/>
+		<axis xyz="0 1 0"/>
+	</joint>
+
+
+</robot>
+
+
+
+
+
+

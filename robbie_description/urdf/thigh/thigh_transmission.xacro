@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+	<transmission name="knee_transmission">
+		<type>transmission_interface/SimpleTransmission</type>
+		<!-- FOR HYDRO -->  <!--
+		<joint name="knee_joint"/>
+		-->
+		<!-- FOR INDIGO -->
+		<joint name="knee_joint">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+    	</joint>
+		<actuator name="knee_Motor">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+			<mechanicalReduction>1</mechanicalReduction>
+		</actuator>
+	</transmission>
+
+
+</robot>

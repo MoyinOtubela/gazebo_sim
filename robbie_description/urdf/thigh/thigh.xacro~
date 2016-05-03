@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:include filename="$(find robbie_description)/urdf/thigh/thigh_transmission.xacro" />
+
+	<!-- DECLARE VARIABLES -->
+  <xacro:property name="thigh_height" value="0.363"/>
+  <xacro:property name="thigh_width" value="0.384"/>
+  <xacro:property name="thigh_depth" value="0.17"/>
+  <xacro:property name="thigh_mass" value="2"/>
+
+	<xacro:macro name="thigh" params="parent">
+		<link name="thigh_link">
+			<collision>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<geometry>
+				 <mesh filename="package://robbie_description/meshes/thigh_collision.stl"/>
+			 </geometry>
+		 </collision>
+		 <visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://robbie_description/meshes/thigh.stl" scale="1 1 1"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0.0 0.0 0.0 1.0"/>
+			</material>
+		</visual>
+		<inertial>
+			<origin xyz="0 0 ${thigh_height/2}" rpy="0 0 0"/>
+			<mass value="${thigh_mass}"/>
+			<box_inertia m="${thigh_mass}" x="${thigh_depth}" y="${thigh_height}" z="${thigh_width}"/>
+		</inertial>
+		</link>
+
+		<gazebo reference="thigh_link">
+			<material>Gazebo/Black</material>
+			<turnGravityOff>false</turnGravityOff>
+		</gazebo>
+
+		<joint name="knee_joint" type="revolute">
+			<origin rpy="0 -2.44346095 0" xyz="0 0 .347"/>
+			<parent link= "${parent}" />
+			<child link="thigh_link"/>
+			<axis xyz="0 1 0"/>
+			<dynamics damping="1"/>
+			<limit effort="300" lower="0" upper="1" velocity="0.1"/>
+		</joint>
+
+	</xacro:macro>
+
+</robot>
+
+
+
+
+
+
+
+

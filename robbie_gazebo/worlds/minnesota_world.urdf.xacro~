@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+
+<robot name="minnesota_test_config" xmlns:xacro="http://ros.org/wiki/xacro">  
+  <xacro:property name="X" value="0.0796875" />
+  <xacro:property name="Y" value="-0.3980667" />
+  <xacro:property name="dX" value="0.053125" />
+  <xacro:property name="dY" value="0.056867" />
+  <xacro:property name="M_PI" value="3.14159265359" />
+
+
+  <link name="origin">
+    <inertial> 
+      <origin xyz="0 0 0" />
+      <mass value="0" />
+      <inertia  ixx="0" ixy="0"  ixz="0"  iyy="0"  iyz="0"  izz="0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+        <box size="0 0 0" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <box size="0 0 0"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name='minnesota_board'>
+    <inertial> 
+      <origin xyz="0 0 0" />
+      <mass value="0.5" />
+      <inertia  ixx="0.001" ixy="0"  ixz="0"  iyy="0.001"  iyz="0"  izz="0.001" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" />
+      <geometry>
+            <mesh filename="package://mt_description/meshes/common/minnesota_board.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" />
+      <geometry>
+            <mesh filename="package://mt_description/meshes/common/minnesota_board.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="world_to_board" type="fixed">
+        <origin xyz="0.25 0 0" rpy="0 0 0"/>
+        <parent link="origin"/>
+        <child link="minnesota_board"/>
+  </joint>  
+  <gazebo reference="minnesota_board">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <xacro:macro name="minnesota_disc" params="suffix x y">
+    <link name="minnesota_disc_${suffix}">
+      <inertial> 
+        <origin xyz="0 0 0.009" />
+        <mass value="0.001" />
+        <inertia  ixx="0.0001" ixy="0"  ixz="0"  iyy="0.0001"  iyz="0"  izz="0.0001" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" />
+        <geometry>
+              <mesh filename="package://mt_description/meshes/common/minnesota_disc.stl"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0.009" />
+        <geometry>
+              <cylinder length="0.018" radius="0.0185"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="disc_${suffix}" type="floating">
+        <origin xyz="${x} ${y} 0" rpy="0 0 0"/>
+        <parent link="minnesota_board"/>
+      <child link="minnesota_disc_${suffix}"/>
+      </joint>
+      <gazebo reference="minnesota_disc_${suffix}">
+        <material>Gazebo/Wood</material>
+      </gazebo>          
+  </xacro:macro>
+
+  <!-- <xacro:minnesota_disc suffix="1" x="${X}" y="${Y}"/> -->
+  <xacro:minnesota_disc suffix="2" x="${X-dX}" y="${Y}"/>
+  <xacro:minnesota_disc suffix="3" x="${X-2*dX}" y="${Y}"/>
+  <xacro:minnesota_disc suffix="4" x="${X-3*dX}" y="${Y}"/>
+  <xacro:minnesota_disc suffix="5" x="${X}" y="${Y+dY}"/>
+  <xacro:minnesota_disc suffix="6" x="${X-dX}" y="${Y+dY}"/>
+  <xacro:minnesota_disc suffix="7" x="${X-2*dX}" y="${Y+dY}"/>
+  <xacro:minnesota_disc suffix="8" x="${X-3*dX}" y="${Y+dY}"/>  
+  <xacro:minnesota_disc suffix="9" x="${X}" y="${Y+2*dY}"/>
+  <xacro:minnesota_disc suffix="10" x="${X-dX}" y="${Y+2*dY}"/>
+  <xacro:minnesota_disc suffix="11" x="${X-2*dX}" y="${Y+2*dY}"/>
+  <xacro:minnesota_disc suffix="12" x="${X-3*dX}" y="${Y+2*dY}"/>
+  <xacro:minnesota_disc suffix="13" x="${X}" y="${Y+3*dY}"/>
+  <xacro:minnesota_disc suffix="14" x="${X-dX}" y="${Y+3*dY}"/>
+  <xacro:minnesota_disc suffix="15" x="${X-2*dX}" y="${Y+3*dY}"/>
+  <xacro:minnesota_disc suffix="16" x="${X-3*dX}" y="${Y+3*dY}"/>  
+  <xacro:minnesota_disc suffix="17" x="${X}" y="${Y+4*dY}"/>
+  <xacro:minnesota_disc suffix="18" x="${X-dX}" y="${Y+4*dY}"/>
+  <xacro:minnesota_disc suffix="19" x="${X-2*dX}" y="${Y+4*dY}"/>
+  <xacro:minnesota_disc suffix="20" x="${X-3*dX}" y="${Y+4*dY}"/>
+  <xacro:minnesota_disc suffix="21" x="${X}" y="${Y+5*dY}"/>
+  <xacro:minnesota_disc suffix="22" x="${X-dX}" y="${Y+5*dY}"/>
+  <xacro:minnesota_disc suffix="23" x="${X-2*dX}" y="${Y+5*dY}"/>
+  <xacro:minnesota_disc suffix="24" x="${X-3*dX}" y="${Y+5*dY}"/>
+  <xacro:minnesota_disc suffix="25" x="${X}" y="${Y+6*dY}"/>
+  <xacro:minnesota_disc suffix="26" x="${X-dX}" y="${Y+6*dY}"/>
+  <xacro:minnesota_disc suffix="27" x="${X-2*dX}" y="${Y+6*dY}"/>
+  <xacro:minnesota_disc suffix="28" x="${X-3*dX}" y="${Y+6*dY}"/>
+  <xacro:minnesota_disc suffix="29" x="${X}" y="${Y+7*dY}"/>
+  <xacro:minnesota_disc suffix="30" x="${X-dX}" y="${Y+7*dY}"/>
+  <xacro:minnesota_disc suffix="31" x="${X-2*dX}" y="${Y+7*dY}"/>
+  <xacro:minnesota_disc suffix="32" x="${X-3*dX}" y="${Y+7*dY}"/>
+  <xacro:minnesota_disc suffix="33" x="${X}" y="${Y+8*dY}"/>
+  <xacro:minnesota_disc suffix="34" x="${X-dX}" y="${Y+8*dY}"/>
+  <xacro:minnesota_disc suffix="35" x="${X-2*dX}" y="${Y+8*dY}"/>
+  <xacro:minnesota_disc suffix="36" x="${X-3*dX}" y="${Y+8*dY}"/>
+  <xacro:minnesota_disc suffix="37" x="${X}" y="${Y+9*dY}"/>
+  <xacro:minnesota_disc suffix="38" x="${X-dX}" y="${Y+9*dY}"/>
+  <xacro:minnesota_disc suffix="39" x="${X-2*dX}" y="${Y+9*dY}"/>
+  <xacro:minnesota_disc suffix="40" x="${X-3*dX}" y="${Y+9*dY}"/>
+  <xacro:minnesota_disc suffix="41" x="${X}" y="${Y+10*dY}"/>
+  <xacro:minnesota_disc suffix="42" x="${X-dX}" y="${Y+10*dY}"/>
+  <xacro:minnesota_disc suffix="43" x="${X-2*dX}" y="${Y+10*dY}"/>
+  <xacro:minnesota_disc suffix="44" x="${X-3*dX}" y="${Y+10*dY}"/>
+  <xacro:minnesota_disc suffix="45" x="${X}" y="${Y+11*dY}"/>
+  <xacro:minnesota_disc suffix="46" x="${X-dX}" y="${Y+11*dY}"/>
+  <xacro:minnesota_disc suffix="47" x="${X-2*dX}" y="${Y+11*dY}"/>
+  <xacro:minnesota_disc suffix="48" x="${X-3*dX}" y="${Y+11*dY}"/>
+  <xacro:minnesota_disc suffix="49" x="${X}" y="${Y+12*dY}"/>
+  <xacro:minnesota_disc suffix="50" x="${X-dX}" y="${Y+12*dY}"/>
+  <xacro:minnesota_disc suffix="51" x="${X-2*dX}" y="${Y+12*dY}"/>
+  <xacro:minnesota_disc suffix="52" x="${X-3*dX}" y="${Y+12*dY}"/>
+  <xacro:minnesota_disc suffix="53" x="${X}" y="${Y+13*dY}"/>
+  <xacro:minnesota_disc suffix="54" x="${X-dX}" y="${Y+13*dY}"/>
+  <xacro:minnesota_disc suffix="55" x="${X-2*dX}" y="${Y+13*dY}"/>
+  <xacro:minnesota_disc suffix="56" x="${X-3*dX}" y="${Y+13*dY}"/>
+  <xacro:minnesota_disc suffix="57" x="${X}" y="${Y+14*dY}"/>
+  <xacro:minnesota_disc suffix="58" x="${X-dX}" y="${Y+14*dY}"/>
+  <xacro:minnesota_disc suffix="59" x="${X-2*dX}" y="${Y+14*dY}"/>
+  <xacro:minnesota_disc suffix="60" x="${X-3*dX}" y="${Y+14*dY}"/>                    
+</robot>
+

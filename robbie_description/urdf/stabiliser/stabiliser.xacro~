@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<robot  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:include filename="$(find robbie_description)/urdf/stabiliser/stabiliser.transmission.xacro" />
+
+	<!-- DECLARE VARIABLES -->
+  <xacro:property name="stab_height" value="0.0925"/>
+  <xacro:property name="stab_width" value="0.026"/>
+  <xacro:property name="stab_depth" value="0.25"/>
+  <xacro:property name="stab_mass" value="1"/>
+
+ 	<xacro:property name="stab_wheel_rad" value="0.0762"/>
+  <xacro:property name="stab_wheel_thickness" value="0.04918"/>
+  <xacro:property name="stab_wheel_mass" value="0.75"/>
+
+	<!-- DECLARE STABILISER MACRO -->
+	<xacro:macro name="stabiliser" params="parent">
+		<link name="stab_link">
+			<collision>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<geometry>
+				 <mesh filename="package://robbie_description/meshes/stabiliser_collision.stl"/>
+			 	</geometry>
+		 </collision>
+		 <visual>
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://robbie_description/meshes/stabiliser.stl" scale="1 1 1"/>
+			</geometry>
+			<material name="white">
+				<color rgba="1 1 1 1"/>
+			</material>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 ${stab_height/2}" rpy="0 0 0"/>
+				<mass value="${stab_mass}"/>
+				<box_inertia m="${stab_mass}" x="${stab_depth}" y="${stab_height}" z="${stab_width}"/>
+			</inertial>
+		</link>
+
+		<gazebo reference="stab_link">
+			<material>Gazebo/Grey</material>
+			<turnGravityOff>false</turnGravityOff>
+		</gazebo>
+
+		<link name="stab_wheel">
+			<collision>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<geometry>
+				 <mesh filename="package://robbie_description/meshes/stabiliserWheel_collision.stl"/>
+			 	</geometry>
+		 	</collision>
+		 	<visual>
+				<origin rpy="0 0 0" xyz="0 0 0"/>
+				<geometry>
+					<mesh filename="package://robbie_description/meshes/stabiliserWheel.stl" scale="1 1 1"/>
+				</geometry>
+				<material name="black">
+					<color rgba="0.0 0.0 0.0 1.0"/>
+				</material>
+			</visual>
+			<inertial>
+				<origin xyz="0 0 0" rpy="0 0 0"/>
+				<mass value="${stab_wheel_mass}"/>
+				<inertia  ixx="0.001" ixy = "0" ixz = "0"
+	    						iyy="0.001" iyz = "0"
+	    						izz="0.001"
+	  		/>
+			</inertial>
+		</link>
+
+		<gazebo reference="stab_wheel">
+			<material>Gazebo/Black</material>
+			<mu1>0.0</mu1>
+			<mu2>0.0</mu2>
+		</gazebo>
+
+		<joint name="stab_joint" type="revolute">
+			<origin rpy="0 0.698131701 0" xyz="0 0 .24"/>
+			<parent link="${parent}"/>
+			<child link="stab_link"/>
+			<limit effort="300" lower="0" upper="1.5" velocity="0.01"/>
+			<axis xyz="0 1 0"/>
+		</joint>
+
+		<joint name="stabWheel_joint" type="continuous">
+			<origin rpy="0 0 0" xyz="0 0 .25"/>
+			<parent link="stab_link"/>
+			<child link="stab_wheel"/>
+			<axis xyz="0 1 0"/>
+		</joint>
+
+	</xacro:macro>
+
+</robot>
+
+
+
+
+
+
