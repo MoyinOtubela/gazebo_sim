@@ -1,9 +1,9 @@
 local_costmap:
   global_frame: map
   robot_base_frame: shank_footprint
-  update_frequency: 5
+  update_frequency: 0.05
   publish_frequency: 2.0
-  static_map: true
+  static_map: false
   rolling_window: true
   width: 6.0
   height: 6.0

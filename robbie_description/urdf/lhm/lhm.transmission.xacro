@@ -4,9 +4,6 @@
 	<xacro:macro name="lhm_wheel_transmission" params="side">
 		<transmission name="lhm_${side}_transmission">
 			<type>transmission_interface/SimpleTransmission</type>
-			<!-- FOR HYDRO -->  <!--
-			<joint name="lhm_wheel_${side}_joint"/>  
-			--> 
 			<!-- FOR INDIGO -->
 			<joint name="lhm_wheel_${side}_joint"> 
 				<hardwareInterface>EffortJointInterface</hardwareInterface>

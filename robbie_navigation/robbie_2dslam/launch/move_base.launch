@@ -2,10 +2,12 @@
 
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
 		<remap from="/cmd_vel" to="/robbie/cmd_vel"/>
+		<param name="planner_frequency" value="0"/>
 		<rosparam file="$(find robbie_2dslam)/costmap_commons_params.yaml" command="load" ns="global_costmap" />	
 		<rosparam file="$(find robbie_2dslam)/costmap_commons_params.yaml" command="load" ns="local_costmap" />	
 		<rosparam file="$(find robbie_2dslam)/global_costmap.yaml" command="load"/>	
 		<rosparam file="$(find robbie_2dslam)/local_costmap.yaml" command="load"/>	
+		<rosparam file="$(find robbie_2dslam)/base_local_planner.yaml" command="load"/>	
 	</node>
 
 	<include file="$(find robbie_2dslam)/launch/2dslam.launch"/>

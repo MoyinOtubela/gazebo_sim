@@ -24,6 +24,22 @@
 	  </plugin>
 	</gazebo>
 
+	<gazebo>
+	  <plugin name="lhm_differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+	    <alwaysOn>true</alwaysOn>
+	    <updateRate>100</updateRate>
+	    <leftJoint>lhm_wheel_left_joint</leftJoint>
+	    <rightJoint>lhm_wheel_right_joint</rightJoint>
+	    <wheelSeparation>0.425</wheelSeparation>
+	    <wheelDiameter>0.20435</wheelDiameter>
+	    <torque>20</torque>
+	    <commandTopic>robbie/cmd_vel_lhm</commandTopic>
+	    <odometryTopic>lhm_odom</odometryTopic>
+	    <odometryFrame>lhm_odom</odometryFrame>
+	    <robotBaseFrame>lhm_link</robotBaseFrame>
+	  </plugin>
+	</gazebo>
+
 	  <!-- camera -->
 	<gazebo reference="camera_link">
 		<sensor type="camera" name="camera1">
