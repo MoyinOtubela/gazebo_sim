@@ -26,7 +26,7 @@
 
 	<gazebo>
 	  <plugin name="lhm_differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
-	    <alwaysOn>true</alwaysOn>
+	    <alwaysOn>false</alwaysOn>
 	    <updateRate>100</updateRate>
 	    <leftJoint>lhm_wheel_left_joint</leftJoint>
 	    <rightJoint>lhm_wheel_right_joint</rightJoint>
@@ -36,7 +36,7 @@
 	    <commandTopic>robbie/cmd_vel_lhm</commandTopic>
 	    <odometryTopic>lhm_odom</odometryTopic>
 	    <odometryFrame>lhm_odom</odometryFrame>
-	    <robotBaseFrame>lhm_link</robotBaseFrame>
+	    <robotBaseFrame>shank_footprint</robotBaseFrame>
 	  </plugin>
 	</gazebo>
 
@@ -82,28 +82,27 @@
 	</gazebo>
 
 	  <!-- hokuyo -->
-	<gazebo reference="hokuyo_link">
+<!-- 	<gazebo reference="hokuyo_link">
 		<sensor type="ray" name="head_hokuyo_sensor">
 		  <pose>0 0 0 0 0 0</pose>
-		  <visualize>false</visualize>
+		  <visualize>true</visualize>
 		  <update_rate>40</update_rate>
 		  <ray>
 		    <scan>
 		      <horizontal>
 		        <samples>720</samples>
 		        <resolution>1</resolution>
-		        <min_angle>-1.570796</min_angle>
-		        <max_angle>1.570796</max_angle>
+		        <min_angle>-0.4</min_angle>
+		        <max_angle>0.4</max_angle>
 		      </horizontal>
 		    </scan>
 		    <range>
-		      <min>0.10</min>
-		      <max>5.0</max>
-		      <resolution>0.01</resolution>
+		      <min>0.1</min>
+		      <max>1</max>
+		      <resolution>100</resolution>
 		    </range>
 		    <noise>
 		      <type>gaussian</type>
-		      
 		      <mean>0.0</mean>
 		      <stddev>0.01</stddev>
 		    </noise>
@@ -114,8 +113,142 @@
 		  </plugin>
 		</sensor>
 	</gazebo>
+ -->
+<!-- 	<gazebo reference="shank_proximity_link">
+		<material>Gazebo/Red</material>
+		<sensor name="shank_kinect" type="depth">
+			<pose>0 0 0 0 0 0</pose>
+			<visualize>true</visualize>
+			<update_rate>20</update_rate>
+			<camera>
+			  <horizontal_fov>1.047198</horizontal_fov>
+			  <image>
+			    <width>640</width>
+			    <height>480</height>
+			    <format>R8G8B8</format>
+			  </image>
+			  <clip>
+			    <near>0.08</near>
+			    <far>2</far>
+			  </clip>
+			</camera>
+		    <alwaysOn>true</alwaysOn>
+		  <plugin name="shank_proximity_controller" filename="libgazebo_ros_openni_kinect.so">
+		    <baseline>0.1</baseline>
+		    <alwaysOn>true</alwaysOn>
+		    <updateRate>1.0</updateRate>
+		    <cameraName>robbie</cameraName>
+		    <imageTopicName>shank/depth/image_raw</imageTopicName>
+		    <cameraInfoTopicName>robbie/depth/camera_info</cameraInfoTopicName>
+		    <depthImageTopicName>shank/depth/image_raw</depthImageTopicName>
+		    <depthImageInfoTopicName>shank/depth/camera_info</depthImageInfoTopicName>
+		    <pointCloudTopicName>shank/depth/points</pointCloudTopicName>
+		    <frameName>shank_kinect_optical_frame</frameName>
+		    <pointCloudCutoff>0.4</pointCloudCutoff>
+		    <distortionK1>0.00000001</distortionK1>
+		    <distortionK2>0.00000001</distortionK2>
+		    <distortionK3>0.00000001</distortionK3>
+		    <distortionT1>0.00000001</distortionT1>
+		    <distortionT2>0.00000001</distortionT2>
+		    <CxPrime>0</CxPrime>
+		    <Cx>0</Cx>
+		    <Cy>0</Cy>
+		    <focalLength>0</focalLength>
+		    <hackBaseline>0</hackBaseline>
+		  </plugin>
+  		</sensor>
+ -->
+<!--  		<sensor type="ray" name="shank_hokuyo_sensor">
+		  <pose>0 0 0 0 0 0</pose>
+		  <visualize>true</visualize>
+		  <update_rate>40</update_rate>
+		  <ray>
+		    <scan>
+		      <horizontal>
+		        <samples>720</samples>
+		        <resolution>1</resolution>
+		        <min_angle>-0.4</min_angle>
+		        <max_angle>0</max_angle>
+		      </horizontal>
+		    </scan>
+		    <range>
+		      <min>0</min>
+		      <max>1.5</max>
+		      <resolution>0.0001</resolution>
+		    </range>
+		    <noise>
+		      <type>gaussian</type>
+		      <mean>0.0</mean>
+		      <stddev>0.01</stddev>
+		    </noise>
+		  </ray>
+		  <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+		    <topicName>/robbie/laser/shank_scan</topicName>
+		    <frameName>shank_proximity_link</frameName>
+		  </plugin>
+		</sensor>
+ -->	
+    <!-- </gazebo> -->
 
 
+<!-- 		<sensor type="contact" name="stabwheel_contact">
+			<contact>
+				<collision>stab_contact_collision</collision>
+				<topic>robbie/stabwheel/contact</topic>
+			</contact>
+			<visualize>true</visualize>
+ 		  <plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+		    <bumperTopicName>robbie/stabwheel/contact</bumperTopicName>
+		    <frameName>stabWheel_sensor_joint</frameName>
+		    <alwaysOn>true</alwaysOn>
+		    <updateRate>5.0</updateRate>
+			<visualize>true</visualize>
+		  </plugin>
+		</sensor>
+ -->		
+
+<!-- 	<gazebo reference="shank_link">
+		<material>Gazebo/White</material>
+		<sensor type="range" name="shank_sonar">
+			<topic>robbie/shank/sonar</topic>
+			<sonar>
+				<min>-0.5</min>
+				<max>0.5</max>
+				<radius>0.3</radius>
+			</sonar>
+
+			<plugin name="shank_range_controller" filename="libgazebo_ros_range.so">
+				<topicName>robbie/shank/sonar</topicName>
+				<frameName>shank_link</frameName>
+				<updateRate>50.0</updateRate>
+				<visualize>true</visualize>
+				<alwaysOn>true</alwaysOn>
+			</plugin>
+
+		</sensor>
+	</gazebo>
+ -->
+
+ <!-- 	<gazebo reference="stab_contact_link">
+		<material>Gazebo/White</material>
+		<sensor type="contact" name="stabwheel_contact">
+			<visualize>true</visualize>
+			<contact>
+				<collision>lhm_link_collision</collision>
+				<topic>robbie/lhm/contact</topic> 
+			</contact>
+ 		  <plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+		    <bumperTopicName>robbie/stabwheel/contact</bumperTopicName>
+		    <frameName>stab_contact_link</frameName>
+		    <alwaysOn>true</alwaysOn>
+		    <updateRate>4.0</updateRate>
+			<visualize>true</visualize>
+		  </plugin>
+		</sensor>
+
+	</gazebo>
+ -->
+  
  <!-- <gazebo reference="kinect_link">
  	<sensor name="Kinect" type="depth">
 	    <pose>0.2 0 0.265 0 0 0</pose>
@@ -156,5 +289,6 @@
 	 		<hackBaseline>0</hackBaseline>
 	 	</plugin>
 	 </sensor>	
- </gazebo> -->
+ </gazebo>
+-->
 </robot>

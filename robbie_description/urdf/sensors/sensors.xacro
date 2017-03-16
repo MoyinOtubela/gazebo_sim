@@ -36,7 +36,131 @@
 	
 
   <!-- Hokuyo Laser -->
-  <link name="hokuyo_link">
+<!--   <link name="hokuyo_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rrbot_description/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+ -->
+<!--   <link name="shank_proximity_link">
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://robbie_description/meshes/kinect.dae" scale="0.8 0.8 0.8"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+ -->
+
+<!--   <joint name="hokuyo_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 0 0.4" rpy="1.57 -1.22173048 0"/>
+    <parent link="shank_link"/>
+    <child link="hokuyo_link"/>
+    <limit effort="300" lower="0" upper="1.5" velocity="0.01"/>
+  </joint> 
+ -->
+
+
+<!--   <joint name="shank_kinect_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.08 0 0.17350" rpy="0 0 0"/>
+    <parent link="shank_link"/>
+    <child link="shank_proximity_link"/>
+    <limit effort="300" lower="0" upper="1.5" velocity="0.01"/>
+  </joint>  
+ 
+ -->
+<!--   <joint name="shank_kinect_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+    <parent link="shank_proximity_link"/>
+    <child link="shank_kinect_optical_frame"/>
+  </joint>  
+
+  <link name="shank_kinect_optical_frame"/>
+ -->
+<!--   <joint name="shank_hokuyo_joint" type="fixed">
+    <axis xyz="0 0 1" />
+    <origin xyz="0.1 0 0.17350" rpy="-1.57 0 0"/>
+    <parent link="shank_link"/>
+    <child link="shank_proximity_link"/>
+    <limit effort="300" lower="0" upper="1.5" velocity="0.01"/>
+  </joint>  
+ -->  
+
+<!--       <geometry>
+    <box size="0.1 0.1 0.1"/>
+      </geometry>
+ -->
+
+<!--   <link name="stab_contact_link">
+      <collision name="stab_contact">
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+         <mesh filename="package://robbie_description/meshes/stabiliserWheel_collision.stl"/>
+        </geometry>
+      </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <sphere radius="0.1"/>
+        <mesh filename="package://robbie_description/meshes/stabiliserWheel.stl" scale="1 1 1"/>
+        <cylinder radius="0.01" length="0.05"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="0" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+    </inertial>
+  
+  </link>
+ -->
+<!--   <joint name="stab_sensor_joint" type="fixed">
+    <axis xyz="0 0 0" />
+    <origin xyz="0.4 0 0" rpy="0 0 0"/>
+    <parent link="stab_wheel"/>
+    <child link="stab_contact_link"/>
+  </joint>  
+ -->
+<!-- 
+  <joint name="stabWheel_sensor_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="-0.1 0 .2"/>
+    <parent link="stab_link"/>
+    <child link="stab_contact_link"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+ -->
+
+
+
+
+<!--   <link name="kinect_link">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -58,35 +182,7 @@
     </inertial>
   </link>
 
-  <joint name="hokuyo_joint" type="fixed">
-    <axis xyz="0 1 0" />
-    <origin xyz="0 0 0.4" rpy="0 -1.22173048 0"/>
-    <parent link="shank_link"/>
-    <child link="hokuyo_link"/>
-  </joint>  
-
-  <!--link name="kinect_link">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-    <box size="0.1 0.1 0.1"/>
-      </geometry>
-    </collision>
-
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://rrbot_description/meshes/hokuyo.dae"/>
-      </geometry>
-    </visual>
-
-    <inertial>
-      <mass value="1e-5" />
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
-    </inertial>
-  </link-->
-
+ -->
 </robot>
 
 

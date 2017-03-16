@@ -70,7 +70,7 @@
 			<material>Gazebo/Black</material>
 			<mu1>0.0</mu1>
 			<mu2>0.0</mu2>
-		</gazebo>
+ 		</gazebo>
 
 		<joint name="stab_joint" type="revolute">
 			<origin rpy="0 0.698131701 0" xyz="0 0 .24"/>

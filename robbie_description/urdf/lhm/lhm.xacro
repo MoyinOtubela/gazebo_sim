@@ -62,7 +62,7 @@
 		
 		<!-- lhm link -->
 		<link name="lhm_link">
-			<collision>
+			<collision name = "lhm_link">
 				<origin rpy="0 0 0" xyz="0 0 0"/>
 				<geometry>
 					<mesh filename="package://robbie_description/meshes/butt_PART_collision.STL"/>
@@ -80,18 +80,18 @@
 				<box_inertia m="${lhm_mass}" x="${lhm_depth}" y="${lhm_height}" z="${lhm_width}"/>
 			</inertial>  
 		</link>
-
+<!-- 
 		<gazebo reference="lhm_link">
 			<material>Gazebo/White</material>
 		</gazebo>
-
+ -->
 		<joint name="lhm_torso_joint" type="prismatic">
 			<origin rpy="0 0 0" xyz="-0.03 0 -0.05"/>
 			<parent link="torso_link"/>
 			<child link="lhm_link"/>
 			<axis xyz="0 0 1"/>
 			<dynamics damping="1"/>
-			<limit effort="300" lower="-.2" upper="0" velocity="0.1"/>
+			<limit effort="300" lower="-.4" upper="0" velocity="0.1"/>
 		</joint>
 
 	<!-- declare two shank wheels -->
