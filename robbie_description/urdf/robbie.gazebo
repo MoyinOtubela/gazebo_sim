@@ -24,9 +24,9 @@
 	  </plugin>
 	</gazebo>
 
-	<gazebo>
+<!-- 	<gazebo>
 	  <plugin name="lhm_differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
-	    <alwaysOn>false</alwaysOn>
+	    <alwaysOn>true</alwaysOn>
 	    <updateRate>100</updateRate>
 	    <leftJoint>lhm_wheel_left_joint</leftJoint>
 	    <rightJoint>lhm_wheel_right_joint</rightJoint>
@@ -39,7 +39,7 @@
 	    <robotBaseFrame>shank_footprint</robotBaseFrame>
 	  </plugin>
 	</gazebo>
-
+ -->
 	  <!-- camera -->
 	<gazebo reference="camera_link">
 		<sensor type="camera" name="camera1">
