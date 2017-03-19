@@ -85,10 +85,10 @@
 			</inertial>  
 		</link>
 
-		<gazebo reference="${name}_link">
+<!-- 		<gazebo reference="${name}_link">
 			<material>Gazebo/White</material>
 		</gazebo>
-
+ -->
 
 		<!-- footprint-shank joint -->
 		<joint name="${name}_footprint_joint" type="fixed">

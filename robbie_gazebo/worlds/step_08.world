@@ -1,0 +1,1380 @@
+<sdf version='1.6'>
+  <world name='myworld'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.5 -1</direction>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <physics name='default_physics' default='0' type='ode'>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>50</iters>
+          <sor>1.3</sor>
+          <use_dynamic_moi_rescaling>0</use_dynamic_moi_rescaling>
+        </solver>
+        <constraints>
+          <cfm>0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>100</contact_max_correcting_vel>
+          <contact_surface_layer>0.001</contact_surface_layer>
+        </constraints>
+      </ode>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='robbie'>
+      <link name='shank_footprint'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose frame=''>0.163037 0 0.15934 0 -0 0</pose>
+          <mass>7</mass>
+          <inertia>
+            <ixx>0.0904763</ixx>
+            <ixy>0</ixy>
+            <ixz>-0.0195421</ixz>
+            <iyy>0.0870543</iyy>
+            <iyz>0</iyz>
+            <izz>0.137055</izz>
+          </inertia>
+        </inertial>
+        <collision name='shank_footprint_fixed_joint_lump__shank_link_collision'>
+          <pose frame=''>0 0 0.1 0 1.22173 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/shank_collision.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='shank_footprint_fixed_joint_lump__shank_link_visual'>
+          <pose frame=''>0 0 0.1 0 1.22173 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/shank.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='thigh_link'>
+        <pose frame=''>0.326073 0 0.218681 0 -1.22173 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0.1815 0 -0 0</pose>
+          <mass>2</mass>
+          <inertia>
+            <ixx>0.0465375</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0293927</iyy>
+            <iyz>0</iyz>
+            <izz>0.0267782</izz>
+          </inertia>
+        </inertial>
+        <collision name='thigh_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/thigh_collision.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='thigh_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/thigh.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='knee_joint' type='revolute'>
+        <child>thigh_link</child>
+        <parent>shank_footprint</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1</upper>
+            <effort>300</effort>
+            <velocity>0.1</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='torso_link'>
+        <pose frame=''>-0.015035 0 0.342834 0 0.34827 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0.192 0 -0 0</pose>
+          <mass>16</mass>
+          <inertia>
+            <ixx>0.36941</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.240302</iyy>
+            <iyz>0</iyz>
+            <izz>0.264109</izz>
+          </inertia>
+        </inertial>
+        <collision name='torso_link_collision'>
+          <pose frame=''>-0.03 0 -0.042 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/torso.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='torso_link_fixed_joint_lump__camera_link_collision_1'>
+          <pose frame=''>0 0 0.42 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.05</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='torso_link_visual'>
+          <pose frame=''>-0.03 0 -0.042 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/torso.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/White</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <visual name='torso_link_fixed_joint_lump__camera_link_visual_1'>
+          <pose frame=''>0 0 0.42 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.05 0.05 0.05</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>__default__</uri>
+              <name>__default__</name>
+            </script>
+          </material>
+        </visual>
+        <velocity_decay/>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <sensor name='camera1' type='camera'>
+          <update_rate>30</update_rate>
+          <camera name='head'>
+            <horizontal_fov>1.39626</horizontal_fov>
+            <image>
+              <width>800</width>
+              <height>800</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.02</near>
+              <far>300</far>
+            </clip>
+            <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.007</stddev>
+            </noise>
+          </camera>
+          <plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>0.0</updateRate>
+            <cameraName>robbie/camera1</cameraName>
+            <imageTopicName>image_raw</imageTopicName>
+            <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+            <frameName>camera_link</frameName>
+            <hackBaseline>0.07</hackBaseline>
+            <distortionK1>0.0</distortionK1>
+            <distortionK2>0.0</distortionK2>
+            <distortionK3>0.0</distortionK3>
+            <distortionT1>0.0</distortionT1>
+            <distortionT2>0.0</distortionT2>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose frame=''>0 0 0.42 0 -0 0</pose>
+        </sensor>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='hip_joint' type='revolute'>
+        <child>torso_link</child>
+        <parent>thigh_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1</lower>
+            <upper>0.7</upper>
+            <effort>300</effort>
+            <velocity>0.1</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='lhm_link'>
+        <pose frame=''>-0.060298 0 0.306074 0 0.34827 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0.02 0 -0 0</pose>
+          <mass>2.25</mass>
+          <inertia>
+            <ixx>0.021468</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.0213977</iyy>
+            <iyz>0</iyz>
+            <izz>0.000529687</izz>
+          </inertia>
+        </inertial>
+        <collision name='lhm_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/butt_PART_collision.STL</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='lhm_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/butt_PART.STL</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='lhm_torso_joint' type='prismatic'>
+        <child>lhm_link</child>
+        <parent>torso_link</parent>
+        <axis>
+          <xyz>0.341272 0 0.939965</xyz>
+          <limit>
+            <lower>-0.4</lower>
+            <upper>0</upper>
+            <effort>300</effort>
+            <velocity>0.1</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='lhm_wheel_left_link'>
+        <pose frame=''>-0.060298 -0.2125 0.306074 0 0.34827 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.2</mass>
+          <inertia>
+            <ixx>0.000532739</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000532739</iyy>
+            <iyz>0</iyz>
+            <izz>0.00104397</izz>
+          </inertia>
+        </inertial>
+        <collision name='lhm_wheel_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/butt_wheelFini_collision.STL</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='lhm_wheel_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/butt_wheelFini.STL</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='lhm_wheel_left_joint' type='revolute'>
+        <child>lhm_wheel_left_link</child>
+        <parent>lhm_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='lhm_wheel_right_link'>
+        <pose frame=''>-0.060298 0.2125 0.306074 0 0.34827 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.2</mass>
+          <inertia>
+            <ixx>0.000532739</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000532739</iyy>
+            <iyz>0</iyz>
+            <izz>0.00104397</izz>
+          </inertia>
+        </inertial>
+        <collision name='lhm_wheel_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/butt_wheelFini_collision.STL</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='lhm_wheel_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/butt_wheelFini.STL</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='lhm_wheel_right_joint' type='revolute'>
+        <child>lhm_wheel_right_link</child>
+        <parent>lhm_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='shoulder_left_link'>
+        <pose frame=''>0.087346 0.128 0.624824 0 0.34827 0</pose>
+        <inertial>
+          <pose frame=''>0 0.16 -0.15 0 -0 0</pose>
+          <mass>0.25</mass>
+          <inertia>
+            <ixx>0.00191406</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00191406</iyy>
+            <iyz>0</iyz>
+            <izz>7.8125e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='shoulder_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/shoulderAss.STL</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='shoulder_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/shoulderAss.STL</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Red</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='shoulder_left_joint' type='revolute'>
+        <child>shoulder_left_link</child>
+        <parent>torso_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='arm_left_link'>
+        <pose frame=''>0.06687 0.288 0.568426 0 0.34827 0</pose>
+        <inertial>
+          <pose frame=''>0 0 -0.1325 0 -0 0</pose>
+          <mass>0.25</mass>
+          <inertia>
+            <ixx>0.00148802</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00148802</iyy>
+            <iyz>0</iyz>
+            <izz>5e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='arm_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/shoulderAss2_lowerfini.STL</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='arm_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/shoulderAss2_lowerfini.STL</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='elbow_left_joint' type='prismatic'>
+        <child>arm_left_link</child>
+        <parent>shoulder_left_link</parent>
+        <axis>
+          <xyz>0.341272 0 0.939965</xyz>
+          <limit>
+            <lower>-0.2</lower>
+            <upper>0</upper>
+            <effort>300</effort>
+            <velocity>0.1</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <friction>1</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='shoulder_right_link'>
+        <pose frame=''>0.087346 -0.128 0.624824 0 0.34827 0</pose>
+        <inertial>
+          <pose frame=''>0 -0.16 -0.15 0 -0 0</pose>
+          <mass>0.25</mass>
+          <inertia>
+            <ixx>0.00191406</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00191406</iyy>
+            <iyz>0</iyz>
+            <izz>7.8125e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='shoulder_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 -3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/shoulderAss.STL</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='shoulder_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 -3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/shoulderAss.STL</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Red</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='shoulder_right_joint' type='revolute'>
+        <child>shoulder_right_link</child>
+        <parent>torso_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <friction>0</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='arm_right_link'>
+        <pose frame=''>0.06687 -0.288 0.568426 0 0.34827 0</pose>
+        <inertial>
+          <pose frame=''>0 0 -0.1325 0 -0 0</pose>
+          <mass>0.25</mass>
+          <inertia>
+            <ixx>0.00148802</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00148802</iyy>
+            <iyz>0</iyz>
+            <izz>5e-05</izz>
+          </inertia>
+        </inertial>
+        <collision name='arm_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/shoulderAss2_lowerfini.STL</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='arm_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/shoulderAss2_lowerfini.STL</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='elbow_right_joint' type='prismatic'>
+        <child>arm_right_link</child>
+        <parent>shoulder_right_link</parent>
+        <axis>
+          <xyz>0.341272 0 0.939965</xyz>
+          <limit>
+            <lower>-0.2</lower>
+            <upper>0</upper>
+            <effort>300</effort>
+            <velocity>0.1</velocity>
+          </limit>
+          <dynamics>
+            <damping>1</damping>
+            <friction>1</friction>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='stab_link'>
+        <pose frame=''>0.225526 0 0.182085 3.14159 1.22173 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0.04625 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>0.000769354</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00526467</iyy>
+            <iyz>0</iyz>
+            <izz>0.00592135</izz>
+          </inertia>
+        </inertial>
+        <collision name='stab_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/stabiliser_collision.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='stab_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/stabiliser.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Grey</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='stab_joint' type='revolute'>
+        <child>stab_link</child>
+        <parent>shank_footprint</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>0</lower>
+            <upper>1.5</upper>
+            <effort>300</effort>
+            <velocity>0.01</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='stab_wheel'>
+        <pose frame=''>0.460449 0 0.09658 3.14159 1.22173 3.14159</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.75</mass>
+          <inertia>
+            <ixx>0.00123987</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00123987</iyy>
+            <iyz>0</iyz>
+            <izz>0.00217741</izz>
+          </inertia>
+        </inertial>
+        <collision name='stab_wheel_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/stabiliserWheel_collision.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>0</mu>
+                <mu2>0</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='stab_wheel_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/stabiliserWheel.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='stabWheel_joint' type='revolute'>
+        <child>stab_wheel</child>
+        <parent>stab_link</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wheel_left_link'>
+        <pose frame=''>0 -0.1175 0.1 0 1.22173 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.25</mass>
+          <inertia>
+            <ixx>0.000679197</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000679197</iyy>
+            <iyz>0</iyz>
+            <izz>0.00127225</izz>
+          </inertia>
+        </inertial>
+        <collision name='wheel_left_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/driveWheel_collision.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='wheel_left_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/driveWheel.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='wheel_left_joint' type='revolute'>
+        <child>wheel_left_link</child>
+        <parent>shank_footprint</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <link name='wheel_right_link'>
+        <pose frame=''>0 0.1175 0.1 0 1.22173 0</pose>
+        <inertial>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <mass>0.25</mass>
+          <inertia>
+            <ixx>0.000679197</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000679197</iyy>
+            <iyz>0</iyz>
+            <izz>0.00127225</izz>
+          </inertia>
+        </inertial>
+        <collision name='wheel_right_link_collision'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/driveWheel_collision.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='wheel_right_link_visual'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/moyin/dev/autonomous_controllers/src/gazebo_sim/robbie_description/meshes/driveWheel.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <name>Gazebo/Black</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+          </material>
+        </visual>
+        <gravity>1</gravity>
+        <velocity_decay/>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='wheel_right_joint' type='revolute'>
+        <child>wheel_right_link</child>
+        <parent>shank_footprint</parent>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+          <use_parent_model_frame>1</use_parent_model_frame>
+        </axis>
+      </joint>
+      <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+        <robotNamespace>/robbie</robotNamespace>
+      </plugin>
+      <plugin name='differential_drive_controller' filename='libgazebo_ros_diff_drive.so'>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>100</updateRate>
+        <leftJoint>wheel_left_joint</leftJoint>
+        <rightJoint>wheel_right_joint</rightJoint>
+        <wheelSeparation>0.23</wheelSeparation>
+        <wheelDiameter>0.2</wheelDiameter>
+        <torque>20</torque>
+        <commandTopic>robbie/cmd_vel</commandTopic>
+        <odometryTopic>odom</odometryTopic>
+        <odometryFrame>odom</odometryFrame>
+        <robotBaseFrame>shank_footprint</robotBaseFrame>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <plugin name="lhm_differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>100</updateRate>
+        <leftJoint>lhm_wheel_left_joint</leftJoint>
+        <rightJoint>lhm_wheel_right_joint</rightJoint>
+        <wheelSeparation>0.425</wheelSeparation>
+        <wheelDiameter>0.20435</wheelDiameter>
+        <torque>20</torque>
+        <commandTopic>robbie/cmd_vel_lhm</commandTopic>
+<!--         <odometryTopic>lhm_odom</odometryTopic>
+        <odometryFrame>lhm_odom</odometryFrame>
+ -->    <robotBaseFrame>shank_footprint</robotBaseFrame>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <static>0</static>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+    </model>
+    <model name='step_0.08'>
+      <pose frame=''>2.8346 0.292135 0 0 -0 0</pose>
+      <link name='Stairs_1'>
+        <visual name='Stairs_1_Visual_0'>
+          <pose frame=''>0 -0 0.04 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>4.075 3.526 0.08</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Wood</name>
+            </script>
+            <ambient>0.996078 0.47451 0.0196078 1</ambient>
+          </material>
+          <meta>
+            <layer>0</layer>
+          </meta>
+        </visual>
+        <collision name='Stairs_1_Collision_0'>
+          <geometry>
+            <box>
+              <size>4.075 3.526 0.08</size>
+            </box>
+          </geometry>
+          <pose frame=''>0 -0 0.04 0 -0 0</pose>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+      </link>
+      <static>1</static>
+    </model>
+    <state world_name='myworld'>
+      <sim_time>15 916000000</sim_time>
+      <real_time>35 951170935</real_time>
+      <wall_time>1489521768 259547736</wall_time>
+      <iterations>15916</iterations>
+      <model name='ground_plane'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='robbie'>
+        <pose frame=''>0.038475 0.01431 0.001329 1.6e-05 0.049434 0.099015</pose>
+        <scale>1 1 1</scale>
+        <link name='arm_left_link'>
+          <pose frame=''>0.180985 0.317881 0.250288 1e-06 0.39832 0.098988</pose>
+          <velocity>0.000114 -0.000474 -0.004935 0.004494 -0.011001 0.004112</velocity>
+          <acceleration>0.737425 -0.484109 -9.82111 2.4015 -0.853152 0.632127</acceleration>
+          <wrench>0.184356 -0.121027 -2.45528 0 -0 0</wrench>
+        </link>
+        <link name='arm_right_link'>
+          <pose frame=''>0.228605 -0.256225 0.247569 3.3e-05 0.427858 0.099051</pose>
+          <velocity>-0.000243 0.000388 -0.004016 -0.006556 -0.0142 -0.012616</velocity>
+          <acceleration>0.95515 0.476043 -8.99375 0.200089 0.131124 0.958446</acceleration>
+          <wrench>0.238788 0.119011 -2.24844 0 -0 0</wrench>
+        </link>
+        <link name='lhm_link'>
+          <pose frame=''>-0.371824 -0.026441 0.166118 0.000163 1.09768 0.099162</pose>
+          <velocity>0.0005 0.000752 -0.007668 0.016467 0.002138 0.011601</velocity>
+          <acceleration>-3.41819 -1.22459 -3.62269 1.77613 0.5441 2.63048</acceleration>
+          <wrench>-7.69093 -2.75533 -8.15105 0 -0 0</wrench>
+        </link>
+        <link name='lhm_wheel_left_link'>
+          <pose frame=''>-0.350823 -0.237901 0.166105 0.00015 1.06142 0.099148</pose>
+          <velocity>0.002718 0.000972 -0.010991 0.016125 0.002095 0.01153</velocity>
+          <acceleration>2.12961 -0.834782 -9.65635 0.101273 -1.06173 3.10602</acceleration>
+          <wrench>0.425922 -0.166956 -1.93127 0 -0 0</wrench>
+        </link>
+        <link name='lhm_wheel_right_link'>
+          <pose frame=''>-0.39283 0.185018 0.166126 4.9e-05 1.03592 0.099034</pose>
+          <velocity>0.001267 0.00081 -0.006657 0.011944 0.001709 0.009377</velocity>
+          <acceleration>-3.1023 -1.38927 0.286309 1.83283 -0.905018 -1.40111</acceleration>
+          <wrench>-0.620461 -0.277853 0.057262 0 -0 0</wrench>
+        </link>
+        <link name='shank_footprint'>
+          <pose frame=''>0.038475 0.01431 0.001329 1.6e-05 0.049434 0.099015</pose>
+          <velocity>0.007374 0.000945 -0.013689 0.000553 -0.024448 -0.004</velocity>
+          <acceleration>3.46955 0.289128 -15.1752 2.60835 -0.285633 -2.96739</acceleration>
+          <wrench>24.2869 2.0239 -106.226 0 -0 0</wrench>
+        </link>
+        <link name='shoulder_left_link'>
+          <pose frame=''>0.293475 0.168263 0.481154 1.8e-05 0.398313 0.099012</pose>
+          <velocity>-0.002386 -2.4e-05 -0.00352 -0.002441 -0.010083 -0.002407</velocity>
+          <acceleration>-0.580826 -0.495975 -4.25935 -1.57182 -0.035112 -1.17662</acceleration>
+          <wrench>-0.145207 -0.123994 -1.06484 0 -0 0</wrench>
+        </link>
+        <link name='shoulder_right_link'>
+          <pose frame=''>0.318781 -0.086483 0.481149 1.9e-05 0.42785 0.099031</pose>
+          <velocity>-0.001464 -1.4e-05 -0.003376 -0.00195 -0.011752 -0.007603</velocity>
+          <acceleration>-0.212673 0.102722 -4.06206 1.42468 -1.39521 -1.38163</acceleration>
+          <wrench>-0.053168 0.025681 -1.01551 0 -0 0</wrench>
+        </link>
+        <link name='stab_link'>
+          <pose frame=''>0.271577 0.037464 0.172051 3.14156 1.17237 -3.04261</pose>
+          <velocity>0.003225 -7e-05 -0.008995 -6.9e-05 -0.005117 0.00011</velocity>
+          <acceleration>2.7128 0.003171 -16.3657 -2.88266 -0.282635 -0.610131</acceleration>
+          <wrench>2.7128 0.003171 -16.3657 0 -0 0</wrench>
+        </link>
+        <link name='stab_wheel'>
+          <pose frame=''>0.500857 0.060242 0.075057 3.14153 1.47272 -3.04264</pose>
+          <velocity>0.006262 -0.000466 -0.007161 0.003305 -0.027023 0.000177</velocity>
+          <acceleration>6.14476 0.59315 -17.5737 -2.80456 -0.27859 3.05258</acceleration>
+          <wrench>4.60857 0.444863 -13.1803 0 -0 0</wrench>
+        </link>
+        <link name='thigh_link'>
+          <pose frame=''>0.373309 0.047569 0.203614 4.4e-05 -1.17231 0.098973</pose>
+          <velocity>0.002351 -0.000385 -0.001309 0.000136 -0.019766 -0.004191</velocity>
+          <acceleration>0.703591 0.47968 -5.23324 -1.34564 0.874305 -2.72126</acceleration>
+          <wrench>1.40718 0.95936 -10.4665 0 -0 0</wrench>
+        </link>
+        <link name='torso_link'>
+          <pose frame=''>0.040391 0.014495 0.344461 3.6e-05 1.0977 0.099046</pose>
+          <velocity>-0.001075 0.000949 -0.0072 -0.001236 -0.005513 -0.004282</velocity>
+          <acceleration>-1.75226 0.004938 -7.79387 -2.87319 0.617568 0.371664</acceleration>
+          <wrench>-28.0362 0.079011 -124.702 0 -0 0</wrench>
+        </link>
+        <link name='wheel_left_link'>
+          <pose frame=''>0.055007 -0.102124 0.101225 3.2e-05 1.27616 0.099045</pose>
+          <velocity>0.00481 -4.8e-05 -0.018347 0.002124 -0.024307 -0.004021</velocity>
+          <acceleration>5.1331 -0.984185 -29.7491 0.758746 -0.531644 -0.963509</acceleration>
+          <wrench>1.28327 -0.246046 -7.43727 0 -0 0</wrench>
+        </link>
+        <link name='wheel_right_link'>
+          <pose frame=''>0.031778 0.131717 0.101227 -0.000161 1.27599 0.098891</pose>
+          <velocity>0.005263 0.001915 -0.018519 0.016068 -0.022918 -0.011689</velocity>
+          <acceleration>5.59273 0.144868 -30.5324 -2.84637 -0.607806 -1.24656</acceleration>
+          <wrench>1.39818 0.036217 -7.63309 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='step_0.08'>
+        <pose frame=''>2.8346 0.292135 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='Stairs_1'>
+          <pose frame=''>2.8346 0.292135 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose frame=''>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>0.726655 -2.48165 0.275015 0 0.031643 1.47219</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>
