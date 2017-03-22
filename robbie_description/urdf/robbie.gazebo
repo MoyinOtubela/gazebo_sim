@@ -8,6 +8,86 @@
 		</plugin>
 	</gazebo>
 
+<!-- contact sensors -->
+ 	<gazebo reference="stab_wheel">
+		<material>Gazebo/Black</material>
+		<mu1>0.0</mu1>
+		<mu2>0.0</mu2>
+		<sensor type="contact" name="stab_wheel_contact">
+			<contact>
+				<collision>stab_wheel_collision_collision</collision>
+				<topicName>robbie/stabwheel/contact2</topicName>
+			</contact>
+ 		  <plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+			<bumperTopicName>robbie/contact/stab_wheel</bumperTopicName>
+			<frameName>stab_wheel</frameName>
+			<alwaysOn>true</alwaysOn>
+			<updateRate>5</updateRate>
+		  </plugin>
+		</sensor>
+	</gazebo>
+
+	<gazebo reference="wheel_left_link">
+		<material>Gazebo/Black</material>
+		<sensor type="contact" name="wheel_left_contact">
+			<contact>
+				<collision>wheel_left_link_collision_collision</collision>
+			</contact>
+			<plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+				<bumperTopicName>robbie/contact/left_wheel</bumperTopicName>
+				<frameName>wheel_left_link</frameName>
+				<alwaysOn>true</alwaysOn>
+				<updateRate>5</updateRate>
+			</plugin>
+		</sensor>
+	</gazebo>
+
+	<gazebo reference="wheel_right_link">
+		<material>Gazebo/Black</material>
+		<sensor type="contact" name="wheel_right_contact">
+			<contact>
+				<collision>wheel_right_link_collision_collision</collision>
+			</contact>
+			<plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+				<bumperTopicName>robbie/contact/right_wheel</bumperTopicName>
+				<frameName>wheel_right_link</frameName>
+				<alwaysOn>true</alwaysOn>
+				<updateRate>5</updateRate>
+			</plugin>
+		</sensor>
+	</gazebo>
+
+	<gazebo reference="lhm_wheel_left_link">
+		<material>Gazebo/Black</material>
+		<sensor type="contact" name="lhm_wheel_left_contact">
+			<contact>
+				<collision>lhm_wheel_left_link_collision_collision</collision>
+			</contact>
+			<plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+				<bumperTopicName>robbie/contact/lhm_left_wheel</bumperTopicName>
+				<frameName>lhm_wheel_left_link</frameName>
+				<alwaysOn>true</alwaysOn>
+				<updateRate>5</updateRate>
+			</plugin>
+		</sensor>
+	</gazebo>
+
+	<gazebo reference="lhm_wheel_right_link">
+		<material>Gazebo/Black</material>
+		<sensor type="contact" name="lhm_wheel_right_contact">
+			<contact>
+				<collision>lhm_wheel_right_link_collision_collision</collision>
+			</contact>
+			<plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+				<bumperTopicName>robbie/contact/lhm_right_wheel</bumperTopicName>
+				<frameName>lhm_wheel_right_link</frameName>
+				<alwaysOn>true</alwaysOn>
+				<updateRate>5</updateRate>
+			</plugin>
+		</sensor>
+	</gazebo>
+
+
 	<gazebo>
 	  <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
 	    <alwaysOn>true</alwaysOn>
@@ -24,7 +104,7 @@
 	  </plugin>
 	</gazebo>
 
-<!-- 	<gazebo>
+	<gazebo>
 	  <plugin name="lhm_differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
 	    <alwaysOn>true</alwaysOn>
 	    <updateRate>100</updateRate>
@@ -34,12 +114,13 @@
 	    <wheelDiameter>0.20435</wheelDiameter>
 	    <torque>20</torque>
 	    <commandTopic>robbie/cmd_vel_lhm</commandTopic>
-	    <odometryTopic>lhm_odom</odometryTopic>
+<!-- 	    <odometryTopic>lhm_odom</odometryTopic>
 	    <odometryFrame>lhm_odom</odometryFrame>
-	    <robotBaseFrame>shank_footprint</robotBaseFrame>
+ -->	   
+        <robotBaseFrame>shank_footprint</robotBaseFrame>
 	  </plugin>
 	</gazebo>
- -->
+
 	  <!-- camera -->
 	<gazebo reference="camera_link">
 		<sensor type="camera" name="camera1">

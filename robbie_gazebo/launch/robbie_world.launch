@@ -9,9 +9,9 @@
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <!-- <arg name="world_name" value="$(find robbie_gazebo)/worlds/robbie.world"/> -->
+    <arg name="world_name" value="$(find robbie_gazebo)/worlds/robbie.world"/>
     <!-- <arg name="world_name" value="$(find robbie_gazebo)/worlds/step_08.world"/> -->
-    <arg name="world_name" value="$(find robbie_gazebo)/worlds/crevice_crossing_w_robot.world"/>
+    <!-- <arg name="world_name" value="$(find robbie_gazebo)/worlds/crevice_crossing_w_robot.world"/> -->
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="$(arg paused)"/>
@@ -31,8 +31,8 @@
     -x 0 -y 0 -z 0.2
     -R 0 -P 0 -Y 0"/>
  -->
-<!--   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model robbie -param robot_description"/>
- -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model robbie -param robot_description"/>
+
 <!--   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model robbie -param robot_description"/>
  -->	
 

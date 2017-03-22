@@ -19,7 +19,7 @@
   <!--************************        WHEELS         ************************-->
   <xacro:macro name="shank_wheel" params="side reflect" parent="shank_link">
 		<link name="wheel_${side}_link">
-			<collision>
+			<collision name="wheel_${side}_link_collision">
 				<origin rpy="0 0 0" xyz="0 0 0"/>
 				<geometry>
 					<mesh filename="package://robbie_description/meshes/driveWheel_collision.stl"/>
@@ -42,10 +42,21 @@
 		</link>
 
 		<!--gazebo defns-->
-		<gazebo reference="wheel_${side}_link">
+<!-- 		<gazebo reference="wheel_${side}_link">
 			<material>Gazebo/Black</material>
+			<sensor type="contact" name="wheel_${side}_contact">
+				<contact>
+					<collision>wheel_${side}_collision_collision</collision>
+				</contact>
+				<plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
+					<bumperTopicName>robbie/wheel_${side}/contact</bumperTopicName>
+					<frameName>wheel_${side}_link</frameName>
+					<alwaysOn>true</alwaysOn>
+					<updateRate>5</updateRate>
+				</plugin>
+			</sensor>
 		</gazebo>
-		
+ -->		
 		<!-- define shank-wheel joint -->
 		<joint name="wheel_${side}_joint" type="continuous">
 			<parent link="shank_link"/>
