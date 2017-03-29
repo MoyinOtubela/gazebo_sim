@@ -11,18 +11,18 @@
 <!-- contact sensors -->
  	<gazebo reference="stab_wheel">
 		<material>Gazebo/Black</material>
-		<mu1>0.0</mu1>
-		<mu2>0.0</mu2>
+		<mu1>0.2</mu1>
+		<mu2>0.2</mu2>
 		<sensor type="contact" name="stab_wheel_contact">
 			<contact>
 				<collision>stab_wheel_collision_collision</collision>
-				<topicName>robbie/stabwheel/contact2</topicName>
+				<!-- <topicName>robbie/stabwheel/contact2</topicName> -->
 			</contact>
  		  <plugin name="gazebo_ros_bumper_controller" filename="libgazebo_ros_bumper.so">
 			<bumperTopicName>robbie/contact/stab_wheel</bumperTopicName>
 			<frameName>stab_wheel</frameName>
 			<alwaysOn>true</alwaysOn>
-			<updateRate>5</updateRate>
+			<updateRate>200</updateRate>
 		  </plugin>
 		</sensor>
 	</gazebo>
@@ -37,7 +37,7 @@
 				<bumperTopicName>robbie/contact/left_wheel</bumperTopicName>
 				<frameName>wheel_left_link</frameName>
 				<alwaysOn>true</alwaysOn>
-				<updateRate>5</updateRate>
+				<updateRate>200</updateRate>
 			</plugin>
 		</sensor>
 	</gazebo>
@@ -52,7 +52,7 @@
 				<bumperTopicName>robbie/contact/right_wheel</bumperTopicName>
 				<frameName>wheel_right_link</frameName>
 				<alwaysOn>true</alwaysOn>
-				<updateRate>5</updateRate>
+				<updateRate>200</updateRate>
 			</plugin>
 		</sensor>
 	</gazebo>
@@ -67,7 +67,7 @@
 				<bumperTopicName>robbie/contact/lhm_left_wheel</bumperTopicName>
 				<frameName>lhm_wheel_left_link</frameName>
 				<alwaysOn>true</alwaysOn>
-				<updateRate>5</updateRate>
+				<updateRate>200</updateRate>
 			</plugin>
 		</sensor>
 	</gazebo>
@@ -82,7 +82,7 @@
 				<bumperTopicName>robbie/contact/lhm_right_wheel</bumperTopicName>
 				<frameName>lhm_wheel_right_link</frameName>
 				<alwaysOn>true</alwaysOn>
-				<updateRate>5</updateRate>
+				<updateRate>200</updateRate>
 			</plugin>
 		</sensor>
 	</gazebo>
