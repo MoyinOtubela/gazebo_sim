@@ -18,7 +18,7 @@
 	<!--************************        WHEELS         ************************-->
   <xacro:macro name="lhm_wheel" params="side reflect" parent="lhm_link">
 		<link name="lhm_wheel_${side}_link">
-			<collision>
+			<collision name="lhm_wheel_${side}_link_collision">
 				<origin rpy="0 0 0" xyz="0 0 0"/>
 				<geometry>
 				 <mesh filename="package://robbie_description/meshes/butt_wheelFini_collision.STL"/>
@@ -41,10 +41,10 @@
 		</link>
 
 		<!--gazebo defns-->
-		<gazebo reference="lhm_wheel_${side}_link">
+<!-- 		<gazebo reference="lhm_wheel_${side}_link">
 			<material>Gazebo/Black</material>
 		</gazebo>
-		
+ -->		
 		<!-- define shank-wheel joint -->
 		<joint name="lhm_wheel_${side}_joint" type="continuous">
 			<parent link="lhm_link"/>

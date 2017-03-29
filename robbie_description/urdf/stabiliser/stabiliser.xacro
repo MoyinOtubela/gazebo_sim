@@ -44,7 +44,7 @@
 		</gazebo>
 
 		<link name="stab_wheel">
-			<collision>
+			<collision name="stab_wheel_collision">
 				<origin rpy="0 0 0" xyz="0 0 0"/>
 				<geometry>
 				 <mesh filename="package://robbie_description/meshes/stabiliserWheel_collision.stl"/>
@@ -66,12 +66,12 @@
 			</inertial>
 		</link>
 
-		<gazebo reference="stab_wheel">
+<!-- 		<gazebo reference="stab_wheel">
 			<material>Gazebo/Black</material>
 			<mu1>0.0</mu1>
 			<mu2>0.0</mu2>
  		</gazebo>
-
+ -->
 		<joint name="stab_joint" type="revolute">
 			<origin rpy="0 0.698131701 0" xyz="0 0 .24"/>
 			<parent link="${parent}"/>
